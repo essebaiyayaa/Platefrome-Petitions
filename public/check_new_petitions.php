@@ -6,10 +6,7 @@ header('Cache-Control: no-cache');
 require_once '../config/config.php';
 
 try {
-    // Récupérer l'ID de la dernière pétition vue par l'utilisateur
     $lastSeenId = isset($_GET['last_id']) ? intval($_GET['last_id']) : 0;
-    
-    // Vérifier s'il y a de nouvelles pétitions avec un ID supérieur
     $query = "SELECT p.IDP, p.TitreP, p.NomPorteurP, p.DateAjoutP
               FROM Petition p 
               WHERE p.IDP > :lastId
@@ -21,7 +18,6 @@ try {
     $newPetition = $stmt->fetch(PDO::FETCH_ASSOC);
     
     if ($newPetition) {
-        // Il y a une nouvelle pétition
         echo json_encode([
             'success' => true,
             'hasNew' => true,
@@ -33,7 +29,6 @@ try {
             ]
         ]);
     } else {
-        // Pas de nouvelle pétition
         echo json_encode([
             'success' => true,
             'hasNew' => false

@@ -84,24 +84,3 @@
         </div>
     </div>
 </footer>
-
-<style>
-footer .hover-primary:hover {
-    color: #0066cc !important;
-    transition: color 0.3s ease;
-}
-
-footer .hub {
-    background: linear-gradient(135deg, #0066cc 0%, #0099ff 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-footer i {
-    margin-right: 8px;
-}
-
-footer a {
-    transition: all 0.3s ease;
-}
-</style>

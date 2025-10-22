@@ -6,8 +6,6 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: ListePetition.php');
     exit();
 }
-
-// Vérifier si un ID de pétition est fourni
 if (!isset($_POST['id_petition']) || empty($_POST['id_petition'])) {
     $_SESSION['error_message'] = "ID de pétition manquant.";
     header('Location: ListePetition.php');
@@ -15,8 +13,6 @@ if (!isset($_POST['id_petition']) || empty($_POST['id_petition'])) {
 }
 
 $id_petition = $_POST['id_petition'];
-
-// Vérification du CAPTCHA
 if (!isset($_POST['g-recaptcha-response']) || empty($_POST['g-recaptcha-response'])) {
     $_SESSION['error_message'] = "Veuillez compléter le CAPTCHA.";
     header("Location: signer_petition.php?id=" . $id_petition);
@@ -49,14 +45,10 @@ if (!$captcha_success->success) {
     header("Location: signer_petition.php?id=" . $id_petition);
     exit();
 }
-
-// Récupérer les données du formulaire
 $nomS = trim($_POST['nomS']);
 $prenomS = trim($_POST['prenomS']);
 $emailS = trim($_POST['emailS']);
 $paysS = trim($_POST['paysS']);
-
-// Validation des données
 if (empty($nomS) || empty($prenomS) || empty($emailS) || empty($paysS)) {
     $_SESSION['error_message'] = "Tous les champs sont obligatoires.";
     header("Location: signer_petition.php?id=" . $id_petition);
@@ -68,8 +60,6 @@ if (!filter_var($emailS, FILTER_VALIDATE_EMAIL)) {
     header("Location: signer_petition.php?id=" . $id_petition);
     exit();
 }
-
-// Vérifier si la pétition existe
 $petition_query = "SELECT * FROM Petition WHERE IDP = :id";
 $petition_stmt = $pdo->prepare($petition_query);
 $petition_stmt->execute(['id' => $id_petition]);
@@ -80,8 +70,6 @@ if (!$petition) {
     header('Location: ListePetition.php');
     exit();
 }
-
-// Vérifier si l'email a déjà signé cette pétition
 $check_query = "SELECT * FROM Signature WHERE IDP = :idp AND EmailS = :email";
 $check_stmt = $pdo->prepare($check_query);
 $check_stmt->execute(['idp' => $id_petition, 'email' => $emailS]);
@@ -91,8 +79,6 @@ if ($check_stmt->fetch()) {
     header("Location: signer_petition.php?id=" . $id_petition);
     exit();
 }
-
-// Insérer la signature
 $insert_query = "INSERT INTO Signature (IDP, NomS, PrenomS, EmailS, PaysS) 
                VALUES (:idp, :nom, :prenom, :email, :pays)";
 $insert_stmt = $pdo->prepare($insert_query);
@@ -105,11 +91,7 @@ try {
         'email' => $emailS,
         'pays' => $paysS
     ]);
-    
-    // Message de succès
     $_SESSION['success_message'] = "Merci ! Votre signature a été enregistrée avec succès.";
-    
-    // Redirection vers la liste des pétitions
     header('Location: ListePetition.php');
     exit();
     

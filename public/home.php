@@ -15,6 +15,7 @@ require_once '../config/config.php';
 </head>
 <body>
     <?php include '../includes/navbar.php'; ?>
+    <div class="toast-container"></div>
     
     <section class="hero-fullscreen d-flex align-items-center">
         <div class="container text-center">
@@ -147,5 +148,18 @@ require_once '../config/config.php';
     <?php include '../includes/footer.php'; ?>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/script.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        <?php
+        $query = "SELECT MAX(IDP) as last_id FROM Petition";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        $last_id = $result['last_id'] ?? 0;
+        ?>
+        initPetitionList(<?php echo $last_id; ?>);
+    });
+    </script>
 </body>
 </html>

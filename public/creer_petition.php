@@ -2,7 +2,6 @@
 session_start();
 require_once '../config/config.php';
 
-// Vérifier si l'utilisateur est connecté
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     header('Location: auth/login.php?redirect=' . urlencode('../creer_petition.php'));
     exit();
@@ -21,24 +20,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = 'Tous les champs obligatoires doivent être remplis.';
     } else {
         try {
-            $query = "INSERT INTO Petition (TitreP, DescriptionP, NomPorteurP, DateAjoutP, DateFinP) 
-                      VALUES (:titre, :description, :nomPorteur, NOW(), :dateFin)";
+            $query = "INSERT INTO Petition (TitreP, DescriptionP, NomPorteurP, Email, DateFinP, IDU) 
+                      VALUES (:titre, :description, :nom_porteur, :email, :date_fin, :user_id)";
+            
             $stmt = $pdo->prepare($query);
             $stmt->execute([
                 ':titre' => $titre,
                 ':description' => $description,
-                ':nomPorteur' => $nomPorteur,
-                ':dateFin' => $dateFin ?: null
+                ':nom_porteur' => $nomPorteur,           
+                ':email' => $_SESSION['Email'],          
+                ':date_fin' => $dateFin ?: null,        
+                ':user_id' => $_SESSION['IDU']          
             ]);
-            
             $petitionId = $pdo->lastInsertId();
+            $_SESSION['success_message'] = 'Pétition créée avec succès !';
+            header("Location: mes_petitions.php");
+            exit();
             
-            $success = 'Pétition créée avec succès !';
-            
-            // Redirection après 2 secondes
-            header("refresh:2;url=ListePetition.php");
         } catch (PDOException $e) {
-            $error = 'Erreur lors de la création de la pétition.';
+            $error = 'Erreur lors de la création de la pétition : ' . $e->getMessage();
         }
     }
 }
@@ -53,103 +53,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800;900&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="assets/css/styles.css">
-    <style>
-        .create-petition-container {
-            max-width: 800px;
-            margin: 4rem auto;
-            padding: 0 1rem;
-        }
-
-        .create-card {
-            background: #fff;
-            border-radius: 20px;
-            padding: 3rem;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-        }
-
-        .create-title {
-            font-family: 'Poppins', sans-serif;
-            font-weight: 800;
-            font-size: 2rem;
-            color: #2c3e50;
-            margin-bottom: 0.5rem;
-            text-align: center;
-        }
-
-        .create-subtitle {
-            font-family: 'Montserrat', sans-serif;
-            color: #6c757d;
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .form-label {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 600;
-            color: #2c3e50;
-            margin-bottom: 0.5rem;
-        }
-
-        .form-control, .form-select {
-            border: 2px solid #e9ecef;
-            border-radius: 12px;
-            padding: 0.75rem 1rem;
-            font-family: 'Montserrat', sans-serif;
-            transition: all 0.3s ease;
-        }
-
-        .form-control:focus, .form-select:focus {
-            border-color: #0066cc;
-            box-shadow: 0 0 0 0.2rem rgba(0, 102, 204, 0.1);
-        }
-
-        textarea.form-control {
-            min-height: 150px;
-            resize: vertical;
-        }
-
-        .btn-create {
-            background: linear-gradient(135deg, #0066cc 0%, #0099ff 100%);
-            color: #fff;
-            border: none;
-            border-radius: 12px;
-            padding: 1rem 2rem;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            width: 100%;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(0, 102, 204, 0.2);
-        }
-
-        .btn-create:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 102, 204, 0.3);
-        }
-
-        .alert {
-            border-radius: 12px;
-            border: none;
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        .required {
-            color: #dc3545;
-        }
-
-        @media (max-width: 767px) {
-            .create-card {
-                padding: 2rem 1.5rem;
-            }
-
-            .create-title {
-                font-size: 1.5rem;
-            }
-        }
-    </style>
 </head>
 <body>
     <?php include '../includes/navbar.php'; ?>
-    
+    <div class="toast-container"></div>
     <div class="create-petition-container">
         <div class="create-card">
             <h1 class="create-title">Créer une Pétition</h1>
@@ -157,13 +64,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <?php if ($error): ?>
                 <div class="alert alert-danger">
-                    <i class="fas fa-exclamation-circle me-2"></i><?php echo $error; ?>
+                    <i class="fas fa-exclamation-circle me-2"></i><?php echo htmlspecialchars($error); ?>
                 </div>
             <?php endif; ?>
 
             <?php if ($success): ?>
                 <div class="alert alert-success">
-                    <i class="fas fa-check-circle me-2"></i><?php echo $success; ?>
+                    <i class="fas fa-check-circle me-2"></i><?php echo htmlspecialchars($success); ?>
                     <br><small>Redirection en cours...</small>
                 </div>
             <?php endif; ?>
@@ -229,5 +136,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php include '../includes/footer.php'; ?>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            <?php
+            $query = "SELECT MAX(IDP) as last_id FROM Petition";
+            $stmt = $pdo->prepare($query);
+            $stmt->execute();
+            $result = $stmt->fetch();
+            $last_id = $result['last_id'] ?? 0;
+            ?>
+            initPetitionList(<?php echo $last_id; ?>);
+        });
+    </script>
 </body>
 </html>

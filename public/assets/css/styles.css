@@ -1,4 +1,4 @@
-/* ========== NAVBAR ========== */
+/* NAVBAR */
 .logo {
     font-weight: bold;
     text-decoration: none;
@@ -85,7 +85,58 @@
     padding: 15px 0;
 }
 
-/* ========== HERO FULLSCREEN ========== */
+/* Dropdown utilisateur */
+.dropdown-menu {
+    min-width: 220px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    border: none;
+    margin-top: 10px;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dropdown-item {
+    padding: 0.7rem 1.2rem;
+    transition: all 0.2s ease;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.95rem;
+}
+
+.dropdown-item:hover {
+    background-color: #f0f7ff;
+    color: #0066cc;
+    padding-left: 1.5rem;
+}
+
+.dropdown-item i {
+    width: 20px;
+    color: #0066cc;
+}
+
+.dropdown-item.text-danger:hover {
+    background-color: #fff5f5;
+    color: #dc3545;
+}
+
+.dropdown-item.text-danger i {
+    color: #dc3545;
+}
+
+.dropdown-divider {
+    margin: 0.5rem 0;
+    border-color: #e9ecef;
+}
 .hero-fullscreen {
     min-height: 90vh;
     padding: 30px 20px;
@@ -142,8 +193,6 @@
     box-shadow: 0 12px 30px rgba(0, 102, 204, 0.35);
     color: #fff;
 }
-
-/* ========== SECTION COMMENT ÇA MARCHE ========== */
 .section-title {
     font-family: 'Poppins', sans-serif;
     font-weight: 700;
@@ -151,6 +200,7 @@
     font-size: 2rem;
 }
 
+/* COMMENT ÇA MARCHE */
 .step-card {
     transition: all 0.3s ease;
     border: 2px solid transparent;
@@ -197,7 +247,7 @@
     line-height: 1.6;
 }
 
-/* ========== SECTION POURQUOI PETITIONHUB ========== */
+/* POURQUOI PETITIONHUB */
 .why-section {
     background: #ffffff;
 }
@@ -262,7 +312,957 @@
     margin-bottom: 0;
 }
 
-/* ========== RESPONSIVE ========== */
+/* ========== LISTE DES PÉTITIONS ========== */
+.petition-list-hero {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 80px 0 60px;
+    text-align: center;
+}
+
+.petition-list-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
+
+.petition-list-subtitle {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1rem;
+    color: #6c757d;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.top-petition-banner {
+    background: linear-gradient(135deg, #0066cc 0%, #0099ff 100%);
+    color: white;
+    padding: 1.5rem 2rem;
+    border-radius: 16px;
+    margin-bottom: 2rem;
+    box-shadow: 0 8px 25px rgba(0, 102, 204, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.top-petition-icon {
+    font-size: 2.5rem;
+    margin-right: 1.5rem;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+.top-petition-content {
+    flex: 1;
+}
+
+.top-petition-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.9;
+    margin-bottom: 0.3rem;
+}
+
+.top-petition-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 1.3rem;
+    margin-bottom: 0.3rem;
+}
+
+.top-petition-signatures {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.top-petition-signatures .number {
+    font-size: 1.5rem;
+    font-weight: 800;
+}
+
+/* notification */
+.toast-container {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    z-index: 9999;
+}
+
+.custom-toast {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    min-width: 350px;
+    animation: slideInRight 0.3s ease-out;
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.toast-header {
+    color: white;
+    border-radius: 8px 8px 0 0;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+}
+
+.toast-body {
+    font-family: 'Montserrat', sans-serif;
+    padding: 1rem;
+}
+
+.petition-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.petition-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    transform: scaleY(0);
+    transition: transform 0.3s ease;
+}
+
+.petition-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 102, 204, 0.2);
+    border-color: #0066cc;
+}
+
+.petition-card:hover::before {
+    transform: scaleY(1);
+}
+
+.petition-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+}
+
+.petition-description {
+    font-family: 'Montserrat', sans-serif;
+    color: #6c757d;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.petition-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    color: #6c757d;
+}
+
+.meta-item i {
+    color: #0066cc;
+    margin-right: 0.5rem;
+    font-size: 1rem;
+}
+
+.petition-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e9ecef;
+}
+
+.signature-count {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #2c3e50;
+}
+
+.signature-count .number {
+    color: #0066cc;
+    font-size: 1.3rem;
+}
+
+.btn-sign {
+    background: linear-gradient(135deg, #0066cc 0%, #0099ff 100%);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 0.7rem 2rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 102, 204, 0.2);
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-sign:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 102, 204, 0.3);
+    color: #fff;
+}
+
+.no-petitions {
+    text-align: center;
+    padding: 4rem 2rem;
+}
+
+.no-petitions-icon {
+    font-size: 4rem;
+    color: #0066cc;
+    margin-bottom: 1.5rem;
+}
+
+.no-petitions-text {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.3rem;
+    color: #6c757d;
+    margin-bottom: 1rem;
+}
+
+.btn-create-hero {
+    background: linear-gradient(135deg, #0066cc 0%, #0099ff 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 0.6rem 1.5rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-create-hero:hover {
+    background: #0052a3;
+    color: white;
+}
+
+/*FORMULAIRE SIGNATURE*/
+.signature-hero {
+    background: linear-gradient(135deg, #0066cc 0%, #0099ff 100%);
+    padding: 60px 0 40px;
+    color: white;
+    text-align: center;
+}
+
+.signature-hero-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.signature-count-badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.form-signature-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 2.5rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    border: 2px solid #e9ecef;
+    transition: all 0.3s ease;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.form-signature-card:hover {
+    border-color: #0066cc;
+    box-shadow: 0 8px 25px rgba(0, 102, 204, 0.15);
+}
+
+.section-title::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(135deg, #0066cc 0%, #0099ff 100%);
+    border-radius: 2px;
+}
+
+.petition-info-section {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.petition-title-display {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.petition-description-display {
+    font-family: 'Montserrat', sans-serif;
+    color: #6c757d;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.petition-meta-display {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid #dee2e6;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+}
+
+.meta-item-display {
+    display: flex;
+    align-items: center;
+    color: #6c757d;
+}
+
+.meta-item-display i {
+    color: #0066cc;
+    margin-right: 0.5rem;
+}
+
+.recent-signatures-section {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-top: 2rem;
+    border: 2px solid #e9ecef;
+}
+
+.recent-signatures-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.signature-item {
+    background: white;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+    border-left: 4px solid white;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.signature-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 2px 8px rgba(0, 102, 204, 0.1);
+}
+
+.signature-info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.signature-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #0066cc 0%, #0099ff 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+}
+
+.signature-details {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.signature-name {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 0.2rem;
+}
+
+.signature-location {
+    font-size: 0.85rem;
+    color: #6c757d;
+}
+
+.signature-date {
+    font-size: 0.8rem;
+    color: #adb5bd;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.no-signatures {
+    text-align: center;
+    color: #6c757d;
+    font-family: 'Montserrat', sans-serif;
+    padding: 2rem;
+    font-style: italic;
+}
+
+.loading-spinner {
+    text-align: center;
+    padding: 2rem;
+    color: #0066cc;
+}
+
+.personal-info-section {
+    margin-top: 2rem;
+}
+
+.form-label {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+.form-control, .form-select {
+    border: 2px solid #e9ecef;
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    font-family: 'Montserrat', sans-serif;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #0066cc;
+    box-shadow: 0 0 0 0.2rem rgba(0, 102, 204, 0.15);
+}
+
+.form-control:read-only {
+    background-color: #f8f9fa;
+    border-color: #dee2e6;
+    color: #6c757d;
+    cursor: not-allowed;
+}
+
+.form-control:read-only:focus {
+    border-color: #dee2e6;
+    box-shadow: none;
+}
+
+textarea.form-control {
+    min-height: 150px;
+    resize: vertical;
+}
+
+.captcha-container {
+    display: flex;
+    justify-content: center;
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 10px;
+}
+
+.btn-submit {
+    background: linear-gradient(135deg, #0066cc 0%, #0099ff 100%);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 0.9rem 2.5rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    width: 100%;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 102, 204, 0.3);
+    margin-top: 1.5rem;
+}
+
+.btn-submit:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 102, 204, 0.4);
+}
+
+.btn-back {
+    color: #0066cc;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 2rem;
+    transition: all 0.3s ease;
+}
+
+.btn-back:hover {
+    color: #0099ff;
+    transform: translateX(-5px);
+}
+
+.btn-back i {
+    margin-right: 0.5rem;
+}
+
+.alert {
+    border-radius: 12px;
+    font-family: 'Montserrat', sans-serif;
+    border: none;
+    padding: 1rem 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.alert-success {
+    background: #d4edda;
+    color: #155724;
+    border-left: 4px solid #28a745;
+}
+
+.alert-danger {
+    background: #f8d7da;
+    color: #721c24;
+    border-left: 4px solid #dc3545;
+}
+
+.already-signed-section {
+    text-align: center;
+    padding: 3rem 2rem;
+}
+
+.already-signed-icon {
+    font-size: 4rem;
+    color: #28a745;
+    margin-bottom: 1.5rem;
+}
+
+.already-signed-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
+
+.already-signed-message {
+    font-family: 'Montserrat', sans-serif;
+    color: #6c757d;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+/* CRÉER PÉTITION */
+.create-petition-container {
+    max-width: 800px;
+    margin: 4rem auto;
+    padding: 0 1rem;
+}
+
+.create-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 3rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+.create-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 2rem;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.create-subtitle {
+    font-family: 'Montserrat', sans-serif;
+    color: #6c757d;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.btn-create {
+    background: linear-gradient(135deg, #0066cc 0%, #0099ff 100%);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 1rem 2rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    width: 100%;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 102, 204, 0.2);
+}
+
+.btn-create:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 102, 204, 0.3);
+}
+
+.required {
+    color: #dc3545;
+}
+
+/* LOGIN PAGE */
+.login-container {
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    max-width: 450px;
+    width: 100%;
+}
+
+.login-header {
+    background: linear-gradient(135deg, #0066cc 0%, #0099ff 100%);
+    padding: 2.5rem 2rem;
+    text-align: center;
+    color: white;
+}
+
+.login-header h1 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.login-header p {
+    font-size: 0.95rem;
+    opacity: 0.9;
+}
+
+.login-body {
+    padding: 2.5rem 2rem;
+}
+
+.password-wrapper {
+    position: relative;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #6c757d;
+    transition: color 0.3s ease;
+}
+
+.password-toggle:hover {
+    color: #0066cc;
+}
+
+.btn-login {
+    background: linear-gradient(135deg, #0066cc 0%, #0099ff 100%);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 0.9rem;
+    font-weight: 700;
+    font-size: 1.05rem;
+    width: 100%;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 102, 204, 0.3);
+    margin-top: 1rem;
+}
+
+.btn-login:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 102, 204, 0.4);
+}
+
+.login-footer {
+    text-align: center;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e9ecef;
+    margin-top: 1.5rem;
+}
+
+.login-footer a {
+    color: #0066cc;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.login-footer a:hover {
+    color: #0099ff;
+}
+
+.back-home {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: white;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.6rem 1.2rem;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+}
+
+.back-home:hover {
+    background: rgba(255, 255, 255, 0.3);
+    color: white;
+    transform: translateX(-5px);
+}
+
+.back-link i {
+    margin-right: 0.5rem;
+}
+
+/* REGISTER PAGE */
+.register-container {
+    max-width: 600px;
+    width: 100%;
+}
+
+.register-card {
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    animation: slideUp 0.5s ease;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.register-header {
+    background: linear-gradient(135deg, #0066cc 0%, #0099ff 100%);
+    padding: 2rem;
+    text-align: center;
+    color: white;
+}
+
+.register-logo {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    line-height: 0.9;
+}
+
+.petition-text {
+    display: block;
+    color: white;
+}
+
+.hub-text {
+    display: block;
+    color: #e6f3ff;
+}
+
+.register-subtitle {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.95rem;
+    opacity: 0.95;
+}
+
+.register-body {
+    padding: 2.5rem;
+}
+
+.input-wrapper {
+    position: relative;
+    margin-bottom: 1.25rem;
+}
+
+.input-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #0066cc;
+    z-index: 10;
+    font-size: 1rem;
+}
+
+.input-wrapper .form-control {
+    padding-left: 45px;
+}
+
+.strength-meter {
+    height: 4px;
+    background: #e0e0e0;
+    border-radius: 2px;
+    margin-top: -0.75rem;
+    margin-bottom: 1.25rem;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.strength-meter.weak {
+    background: linear-gradient(90deg, #dc3545 0%, #dc3545 33%, #e0e0e0 33%);
+}
+
+.strength-meter.medium {
+    background: linear-gradient(90deg, #ffc107 0%, #ffc107 66%, #e0e0e0 66%);
+}
+
+.strength-meter.strong {
+    background: linear-gradient(90deg, #28a745 0%, #28a745 100%);
+}
+
+.login-link {
+    text-align: center;
+    margin: 1.5rem 0;
+    font-family: 'Montserrat', sans-serif;
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+.login-link a {
+    color: #0066cc;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.login-link a:hover {
+    color: #0099ff;
+    text-decoration: underline;
+}
+
+.btn-register {
+    width: 100%;
+    padding: 0.9rem;
+    border-radius: 12px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    background: linear-gradient(135deg, #0066cc 0%, #0099ff 100%);
+    border: none;
+    color: white;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 102, 204, 0.3);
+}
+
+.btn-register:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 102, 204, 0.4);
+}
+
+.btn-register:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/*FOOTER*/
+footer .hover-primary:hover {
+    color: #0066cc !important;
+    transition: color 0.3s ease;
+}
+
+footer .hub {
+    background: linear-gradient(135deg, #0066cc 0%, #0099ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+footer i {
+    margin-right: 8px;
+}
+
+footer a {
+    transition: all 0.3s ease;
+}
+
+footer a.hover-primary:hover {
+    color: #0066cc !important;
+}
+
+footer .event {
+    color: #0099ff;
+}
+
+/*  RESPONSIVE */
 @media (min-width: 992px) {
     .hero-title { 
         font-size: 1.4rem; 
@@ -282,6 +1282,27 @@
     .hero-highlight { 
         font-size: 1.5rem; 
     }
+    
+    .nav-center {
+        position: static;
+        transform: none;
+        margin-top: 1rem;
+    }
+    
+    .navbar-nav {
+        text-align: center;
+    }
+    
+    .d-flex.ms-auto {
+        margin-top: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    
+    .dropdown-menu {
+        text-align: left;
+    }
 }
 
 @media (max-width: 767px) {
@@ -291,37 +1312,362 @@
     .hero-highlight { 
         font-size: 1.2rem; 
     }
+    
     .section-title {
         font-size: 1.6rem;
     }
+    
     .step-card {
         margin-bottom: 1rem;
     }
+    
     .feature-card {
         padding: 1.4rem;
         margin-bottom: 1rem;
     }
+    
     .feature-icon-wrapper {
         width: 50px;
         height: 50px;
         margin-right: 1rem;
     }
+    
     .feature-icon {
         font-size: 1.2rem;
     }
+    
     .feature-title {
         font-size: 1rem;
     }
+    
     .feature-text {
         font-size: 0.9rem;
     }
+    
+    .petition-list-title {
+        font-size: 1.8rem;
+    }
+
+    .petition-card {
+        padding: 1.5rem;
+    }
+
+    .petition-title {
+        font-size: 1.2rem;
+    }
+
+    .petition-footer {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .btn-sign {
+        width: 100%;
+    }
+
+    .top-petition-banner {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .top-petition-icon {
+        margin-right: 0;
+        margin-bottom: 1rem;
+    }
+
+    .custom-toast {
+        min-width: 300px;
+    }
+    
+    .signature-hero-title {
+        font-size: 1.5rem;
+    }
+
+    .form-signature-card {
+        padding: 1.5rem;
+    }
+
+    .petition-title-display {
+        font-size: 1.2rem;
+    }
+
+    .petition-meta-display {
+        flex-direction: column;
+        gap: 0.8rem;
+        align-items: center;
+    }
+
+    .signature-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .captcha-container {
+        transform: scale(0.85);
+        transform-origin: center;
+    }
+    
+    .create-card {
+        padding: 2rem 1.5rem;
+    }
+
+    .create-title {
+        font-size: 1.5rem;
+    }
+}
+/* MES PÉTITIONS*/
+.my-petitions-hero {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 60px 0;
+    text-align: center;
+    margin-bottom: 40px;
 }
 
-/* ========== FOOTER ========== */
-footer a.hover-primary:hover {
-    color: #0066cc !important;
+.my-petitions-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 15px;
+    color: #2c3e50;
 }
 
-footer .event {
-    color: #0099ff;
+.my-petitions-hero .mb-4 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1rem;
+    color: #6c757d;
+    max-width: 600px;
+    margin: 0 auto;
 }
+
+.petition-card-my {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.petition-card-my:hover {
+    box-shadow: 0 10px 30px rgba(0, 102, 204, 0.2);
+    transform: translateY(-5px);
+    border-color: #0066cc;
+}
+
+.petition-title-my {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+}
+
+.petition-description-my {
+    font-family: 'Montserrat', sans-serif;
+    color: #6c757d;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+.petition-meta-my {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+}
+
+.meta-item-my {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #6c757d;
+}
+
+.meta-item-my i {
+    color: #0066cc;
+    font-size: 1rem;
+}
+
+.petition-actions {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e9ecef;
+}
+
+.btn-edit {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    color: white;
+    border: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.2);
+}
+
+.btn-edit:hover {
+    background: linear-gradient(135deg, #2980b9 0%, #21618c 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(52, 152, 219, 0.3);
+    color: white;
+}
+
+.btn-delete {
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+    color: white;
+    border: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(231, 76, 60, 0.2);
+}
+
+.btn-delete:hover {
+    background: linear-gradient(135deg, #c0392b 0%, #a93226 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(231, 76, 60, 0.3);
+    color: white;
+}
+
+.signature-badge {
+    background: linear-gradient(135deg, #0066cc 0%, #0099ff 100%);
+    color: white;
+    padding: 0.6rem 1.2rem;
+    border-radius: 50px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.no-petitions-box {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.no-petitions-box .no-petitions-icon {
+    font-size: 4rem;
+    color: #0066cc;
+    margin-bottom: 1.5rem;
+}
+
+.no-petitions-box .no-petitions-text {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.3rem;
+    color: #6c757d;
+    margin-bottom: 2rem;
+}
+
+/* Responsive pour Mes Pétitions */
+@media (max-width: 767px) {
+    .my-petitions-title {
+        font-size: 1.8rem;
+    }
+
+    .petition-card-my {
+        padding: 1.5rem;
+    }
+
+    .petition-title-my {
+        font-size: 1.2rem;
+    }
+
+    .petition-actions {
+        flex-direction: column;
+    }
+
+    .btn-edit,
+    .btn-delete {
+        width: 100%;
+    }
+
+    .petition-meta-my {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .register-body {
+        padding: 2rem 1.5rem;
+    }
+
+    .register-header {
+        padding: 1.5rem;
+    }
+
+    .register-logo {
+        font-size: 1.6rem;
+    }
+
+    .back-home {
+        position: static;
+        margin-bottom: 1rem;
+        display: inline-flex;
+    }
+}
+
+@media (max-width: 576px) {
+    .login-header h1 {
+        font-size: 1.6rem;
+    }
+
+    .login-body {
+        padding: 2rem 1.5rem;
+    }
+}
+/*Modifier petition*/
+.edit-hero {
+            background:linear-gradient(135deg, #0066cc 0%, #0099ff 100%);
+            padding: 60px 0;
+            color: white;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .edit-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+        }
+        
+        .form-edit-card {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            max-width: 900px;
+            margin: 0 auto 50px;
+        }
+        
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 30px;
+            transition: all 0.3s;
+        }
+        
+        .btn-back:hover {
+            color: #0066cc;
+            gap: 12px;
+        }

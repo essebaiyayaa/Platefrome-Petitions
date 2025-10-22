@@ -1,18 +1,13 @@
 <?php
-// get_recent_signatures.php
 require_once '../config/config.php';
 
 header('Content-Type: application/json');
-
-// Vérifier si un ID de pétition est fourni
 if (!isset($_GET['id']) || empty($_GET['id'])) {
     echo json_encode(['error' => 'ID de pétition manquant']);
     exit();
 }
 
 $id_petition = $_GET['id'];
-
-// Récupérer les 5 dernières signatures
 $query = "SELECT NomS, PrenomS, PaysS, DateS 
           FROM Signature 
           WHERE IDP = :id 

@@ -11,7 +11,6 @@ CREATE TABLE Utilisateur (
     DateInscription DATETIME DEFAULT CURRENT_TIMESTAMP,
     Actif BOOLEAN DEFAULT TRUE
 );
-
 CREATE TABLE Petition (
     IDP INT AUTO_INCREMENT PRIMARY KEY,
     TitreP VARCHAR(200) NOT NULL,
@@ -23,7 +22,6 @@ CREATE TABLE Petition (
     IDU INT, 
     FOREIGN KEY (IDU) REFERENCES Utilisateur(IDU) ON DELETE SET NULL
 );
-
 CREATE TABLE Signature (
     IDS INT AUTO_INCREMENT PRIMARY KEY,
     IDP INT NOT NULL,
@@ -36,6 +34,5 @@ CREATE TABLE Signature (
     IDU INT, 
     FOREIGN KEY (IDP) REFERENCES Petition(IDP) ON DELETE CASCADE,
     FOREIGN KEY (IDU) REFERENCES Utilisateur(IDU) ON DELETE SET NULL,
-    -- Empêcher qu'un email signe deux fois la même pétition
     UNIQUE KEY unique_signature (IDP, EmailS)
 );

@@ -4,9 +4,9 @@ $dbname = 'Petition';
 $username = 'root';     
 $password = '';           
 $options = [
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, // Affiche les erreurs SQL
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, // Retourne les résultats sous forme de tableau associatif
-    PDO::ATTR_EMULATE_PREPARES => false, // Utilise les vraies requêtes préparées
+    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, 
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, 
+    PDO::ATTR_EMULATE_PREPARES => false, 
 ];
 
 try {
