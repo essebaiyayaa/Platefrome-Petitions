@@ -440,7 +440,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
 
                     <button type="submit" class="btn btn-register" id="submitBtn">
-                        <i class="fas fa-user-plus me-2"></i>
                         S'inscrire
                     </button>
                 </form>

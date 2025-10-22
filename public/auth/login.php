@@ -49,7 +49,7 @@ $error_message = isset($error_messages[$error]) ? $error_messages[$error] : '';
     <style>
         body {
             font-family: 'Montserrat', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #0066cc 0%, #0099ff 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -176,17 +176,26 @@ $error_message = isset($error_messages[$error]) ? $error_messages[$error] : '';
             color: #0099ff;
         }
 
-        .back-link {
-            display: inline-flex;
-            align-items: center;
+        .back-home {
+            position: absolute;
+            top: 20px;
+            left: 20px;
             color: white;
             text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
             font-weight: 600;
-            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
             transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.6rem 1.2rem;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
         }
 
-        .back-link:hover {
+        .back-home:hover {
+            background: rgba(255, 255, 255, 0.3);
             color: white;
             transform: translateX(-5px);
         }
@@ -209,10 +218,11 @@ $error_message = isset($error_messages[$error]) ? $error_messages[$error] : '';
 <body>
     <div class="login-container">
         <div class="login-header">
-            <a href="../home.php" class="back-link">
-                <i class="fas fa-arrow-left"></i> Retour à l'accueil
-            </a>
-            <h1><i class="fas fa-sign-in-alt me-2"></i>Connexion</h1>
+            <a href="../home.php" class="back-home">
+            <i class="fas fa-arrow-left"></i>
+            Retour à l'accueil
+        </a>
+            <h1>Connexion</h1>
             <p>Accédez à votre espace PetitionHub</p>
         </div>
 
@@ -249,7 +259,7 @@ $error_message = isset($error_messages[$error]) ? $error_messages[$error] : '';
                 </div>
 
                 <button type="submit" class="btn-login">
-                    <i class="fas fa-sign-in-alt me-2"></i>Se connecter
+                    Se connecter
                 </button>
             </form>
 
