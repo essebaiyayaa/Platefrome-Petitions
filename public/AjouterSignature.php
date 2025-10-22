@@ -2,7 +2,6 @@
 session_start();
 require_once '../config/config.php';
 
-// Vérifier si la requête est POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: ListePetition.php');
     exit();
@@ -17,6 +16,40 @@ if (!isset($_POST['id_petition']) || empty($_POST['id_petition'])) {
 
 $id_petition = $_POST['id_petition'];
 
+// Vérification du CAPTCHA
+if (!isset($_POST['g-recaptcha-response']) || empty($_POST['g-recaptcha-response'])) {
+    $_SESSION['error_message'] = "Veuillez compléter le CAPTCHA.";
+    header("Location: signer_petition.php?id=" . $id_petition);
+    exit();
+}
+$recaptcha_secret = '6LeSHvMrAAAAAAfTEoyKs96MTB1h3HmOKawV80Nv'; 
+$recaptcha_response = $_POST['g-recaptcha-response'];
+$recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
+
+$recaptcha_data = [
+    'secret' => $recaptcha_secret,
+    'response' => $recaptcha_response,
+    'remoteip' => $_SERVER['REMOTE_ADDR']
+];
+
+$options = [
+    'http' => [
+        'header' => "Content-type: application/x-www-form-urlencoded\r\n",
+        'method' => 'POST',
+        'content' => http_build_query($recaptcha_data)
+    ]
+];
+
+$context = stream_context_create($options);
+$verify = file_get_contents($recaptcha_url, false, $context);
+$captcha_success = json_decode($verify);
+
+if (!$captcha_success->success) {
+    $_SESSION['error_message'] = "La vérification CAPTCHA a échoué. Veuillez réessayer.";
+    header("Location: signer_petition.php?id=" . $id_petition);
+    exit();
+}
+
 // Récupérer les données du formulaire
 $nomS = trim($_POST['nomS']);
 $prenomS = trim($_POST['prenomS']);
@@ -26,13 +59,13 @@ $paysS = trim($_POST['paysS']);
 // Validation des données
 if (empty($nomS) || empty($prenomS) || empty($emailS) || empty($paysS)) {
     $_SESSION['error_message'] = "Tous les champs sont obligatoires.";
-    header("Location: signature.php?id=" . $id_petition);
+    header("Location: signer_petition.php?id=" . $id_petition);
     exit();
 }
 
 if (!filter_var($emailS, FILTER_VALIDATE_EMAIL)) {
     $_SESSION['error_message'] = "L'adresse email n'est pas valide.";
-    header("Location: signature.php?id=" . $id_petition);
+    header("Location: signer_petition.php?id=" . $id_petition);
     exit();
 }
 
@@ -55,7 +88,7 @@ $check_stmt->execute(['idp' => $id_petition, 'email' => $emailS]);
 
 if ($check_stmt->fetch()) {
     $_SESSION['error_message'] = "Vous avez déjà signé cette pétition avec cet email.";
-    header("Location: signature.php?id=" . $id_petition);
+    header("Location: signer_petition.php?id=" . $id_petition);
     exit();
 }
 
@@ -82,7 +115,7 @@ try {
     
 } catch (PDOException $e) {
     $_SESSION['error_message'] = "Une erreur est survenue lors de l'enregistrement de votre signature : " . $e->getMessage();
-    header("Location: signature.php?id=" . $id_petition);
+    header("Location: signer_petition.php?id=" . $id_petition);
     exit();
 }
 ?>

@@ -66,6 +66,7 @@ $total_signatures = $count_result['total'];
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800;900&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <link rel="stylesheet" href="assets/css/styles.css">
     <style>
         .signature-hero {
@@ -178,7 +179,6 @@ $total_signatures = $count_result['total'];
             margin-right: 0.5rem;
         }
 
-        /* Nouvelles Styles pour les Signatures Récentes */
         .recent-signatures-section {
             background: #f8f9fa;
             border-radius: 12px;
@@ -303,6 +303,15 @@ $total_signatures = $count_result['total'];
             box-shadow: none;
         }
 
+        .captcha-container {
+            display: flex;
+            justify-content: center;
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
         .btn-submit {
             background: linear-gradient(135deg, #0066cc 0%, #0099ff 100%);
             color: #fff;
@@ -417,6 +426,11 @@ $total_signatures = $count_result['total'];
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 0.5rem;
+            }
+
+            .captcha-container {
+                transform: scale(0.85);
+                transform-origin: center;
             }
         }
     </style>
@@ -549,6 +563,11 @@ $total_signatures = $count_result['total'];
                         </div>
                     </div>
 
+                    <!-- Section CAPTCHA -->
+                    <div class="captcha-container">
+                        <div class="g-recaptcha" data-sitekey="6LeSHvMrAAAAANAytvs46-abyJL1UL8e2DahvmFM"></div>
+                    </div>
+
                     <button type="submit" class="btn btn-submit">
                         Envoyer ma signature
                     </button>
@@ -558,7 +577,6 @@ $total_signatures = $count_result['total'];
                 <!-- Section des Signatures Récentes -->
                 <div class="recent-signatures-section">
                     <h3 class="recent-signatures-title">
-                        <i class="fas fa-pen-fancy me-2" style="color: #0066cc;"></i>
                         Dernières Signatures
                     </h3>
                     <div id="recentSignaturesContainer">
@@ -577,12 +595,21 @@ $total_signatures = $count_result['total'];
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     
     <script>
+        // Validation du formulaire avec CAPTCHA
+        document.getElementById('signatureForm')?.addEventListener('submit', function(e) {
+            const recaptchaResponse = grecaptcha.getResponse();
+            if (!recaptchaResponse) {
+                e.preventDefault();
+                alert('Veuillez compléter le CAPTCHA avant de continuer.');
+                return false;
+            }
+        });
+
         // Fonction pour charger les signatures récentes
         function loadRecentSignatures() {
             const petitionId = <?php echo $id_petition; ?>;
             const container = document.getElementById('recentSignaturesContainer');
             
-            // Créer une requête XMLHttpRequest
             const xhr = new XMLHttpRequest();
             
             xhr.onreadystatechange = function() {
@@ -595,10 +622,7 @@ $total_signatures = $count_result['total'];
                                 let html = '';
                                 
                                 response.signatures.forEach(function(signature) {
-                                    // Obtenir l'initiale du prénom
                                     const initial = signature.PrenomS.charAt(0).toUpperCase();
-                                    
-                                    // Formater la date
                                     const date = new Date(signature.DateS);
                                     const dateFormatted = date.toLocaleDateString('fr-FR', {
                                         day: '2-digit',
@@ -648,8 +672,6 @@ $total_signatures = $count_result['total'];
         // Charger les signatures au chargement de la page
         document.addEventListener('DOMContentLoaded', function() {
             loadRecentSignatures();
-            
-            // Recharger les signatures toutes les 10 secondes
             setInterval(loadRecentSignatures, 10000);
         });
     </script>
