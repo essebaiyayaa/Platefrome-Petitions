@@ -1,11 +1,6 @@
-// ========================================
-// SCRIPT POUR ListePetition.php
-// ========================================
 
-// Variables globales pour ListePetition.php
 let lastSeenPetitionId = 0;
 
-// Fonction pour afficher une notification toast
 function showToast(title, message) {
     const toastContainer = document.querySelector('.toast-container');
     if (!toastContainer) return;
@@ -38,8 +33,6 @@ function showToast(title, message) {
         toastElement.remove();
     });
 }
-
-// Fonction pour charger la pétition la plus populaire (AJAX)
 function loadTopPetition() {
     const xhr = new XMLHttpRequest();
     
@@ -72,8 +65,6 @@ function loadTopPetition() {
     xhr.open('GET', 'get_top_petition.php', true);
     xhr.send();
 }
-
-// Fonction pour vérifier les nouvelles pétitions (AJAX Polling)
 function checkNewPetitions() {
     const xhr = new XMLHttpRequest();
     
@@ -87,19 +78,13 @@ function checkNewPetitions() {
                         const petition = response.petition;
                         
                         console.log('Nouvelle pétition détectée: ID ' + petition.id);
-                        
-                        // Afficher la notification immédiatement
                         showToast(
                             'Nouvelle Pétition !',
                             '<strong>' + escapeHtml(petition.titre) + '</strong><br>' +
                             '<small>Par ' + escapeHtml(petition.nomPorteur) + '</small><br>' +
                             '<em class="text-muted" style="font-size: 0.85rem;">La page va se recharger dans 5 secondes...</em>'
                         );
-                        
-                        // Mettre à jour l'ID pour éviter les doublons
                         lastSeenPetitionId = petition.id;
-                        
-                        // Recharger la page après 5 secondes
                         setTimeout(function() {
                             location.reload();
                         }, 5000);
@@ -116,32 +101,15 @@ function checkNewPetitions() {
     xhr.open('GET', 'check_new_petitions.php?last_id=' + lastSeenPetitionId, true);
     xhr.send();
 }
-
-// Fonction pour initialiser le système de notifications pour ListePetition.php
 function initPetitionList(initialLastId) {
     lastSeenPetitionId = initialLastId;
-    
-    console.log('Système AJAX initialisé');
+    console.log('Système AJAX initialisé avec polling optimisé');
     console.log('Dernier ID pétition vu: ' + lastSeenPetitionId);
-    
-    // Charger la pétition la plus populaire immédiatement
     loadTopPetition();
-    
-    // Premier check après 3 secondes
-    setTimeout(checkNewPetitions, 3000);
-    
-    // Vérifier les nouvelles pétitions toutes les 10 secondes
-    setInterval(checkNewPetitions, 10000);
-    
-    // Actualiser la pétition populaire toutes les 30 secondes
+    checkNewPetitions();
+    setInterval(checkNewPetitions, 3000);
     setInterval(loadTopPetition, 30000);
 }
-
-// ========================================
-// SCRIPT POUR signer_petition.php
-// ========================================
-
-// Validation du formulaire avec CAPTCHA
 function initSignatureForm() {
     const form = document.getElementById('signatureForm');
     if (form) {
@@ -155,8 +123,6 @@ function initSignatureForm() {
         });
     }
 }
-
-// Fonction pour charger les signatures récentes
 function loadRecentSignatures(petitionId) {
     const container = document.getElementById('recentSignaturesContainer');
     if (!container) return;
@@ -220,7 +186,6 @@ function loadRecentSignatures(petitionId) {
     xhr.send();
 }
 
-// Fonction pour initialiser la page de signature
 function initSignaturePage(petitionId) {
     initSignatureForm();
     loadRecentSignatures(petitionId);
@@ -228,12 +193,6 @@ function initSignaturePage(petitionId) {
         loadRecentSignatures(petitionId);
     }, 10000);
 }
-
-// ========================================
-// FONCTION UTILITAIRE
-// ========================================
-
-// Fonction pour échapper le HTML
 function escapeHtml(text) {
     const map = {
         '&': '&amp;',

@@ -411,37 +411,223 @@
     top: 80px;
     right: 20px;
     z-index: 9999;
+    max-width: 400px;
 }
 
 .custom-toast {
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-    min-width: 350px;
-    animation: slideInRight 0.3s ease-out;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 12px 40px rgba(0, 102, 204, 0.25);
+    border: 2px solid transparent;
+    min-width: 380px;
+    overflow: hidden;
+    animation: slideInRight 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    position: relative;
+}
+
+/* Bordure animée gauche */
+.custom-toast::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    background: linear-gradient(135deg, #0066cc 0%, #0099ff 100%);
+    animation: slideDown 0.5s ease-out 0.2s both;
 }
 
 @keyframes slideInRight {
     from {
         opacity: 0;
-        transform: translateX(100px);
+        transform: translateX(120px) scale(0.9);
     }
     to {
         opacity: 1;
-        transform: translateX(0);
+        transform: translateX(0) scale(1);
     }
 }
 
-.toast-header {
-    color: white;
-    border-radius: 8px 8px 0 0;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 700;
+@keyframes slideDown {
+    from {
+        transform: scaleY(0);
+        transform-origin: top;
+    }
+    to {
+        transform: scaleY(1);
+        transform-origin: top;
+    }
 }
 
+/* En-tête du toast */
+.toast-header {
+    background: linear-gradient(135deg, #0066cc 0%, #0099ff 100%);
+    color: white;
+    border: none;
+    border-radius: 14px 14px 0 0;
+    padding: 1rem 1.2rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    align-items: center;
+}
+
+.toast-header i.fas.fa-bell {
+    font-size: 1.2rem;
+    animation: bellRing 0.8s ease-in-out 0.3s;
+    margin-right: 0.8rem;
+}
+
+@keyframes bellRing {
+    0%, 100% { transform: rotate(0deg); }
+    10% { transform: rotate(15deg); }
+    20% { transform: rotate(-15deg); }
+    30% { transform: rotate(10deg); }
+    40% { transform: rotate(-10deg); }
+    50% { transform: rotate(5deg); }
+    60% { transform: rotate(-5deg); }
+    70% { transform: rotate(0deg); }
+}
+
+.toast-header .me-auto {
+    font-size: 1.05rem;
+    letter-spacing: 0.3px;
+}
+
+.toast-header .btn-close {
+    filter: brightness(0) invert(1);
+    opacity: 0.8;
+    transition: all 0.2s ease;
+}
+
+.toast-header .btn-close:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+/* Corps du toast */
 .toast-body {
     font-family: 'Montserrat', sans-serif;
-    padding: 1rem;
+    padding: 1.3rem 1.5rem;
+    background: #ffffff;
+    color: #2c3e50;
+    line-height: 1.6;
+}
+
+.toast-body strong {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: #0066cc;
+    display: block;
+    margin-bottom: 0.4rem;
+}
+
+.toast-body small {
+    color: #6c757d;
+    font-size: 0.9rem;
+    display: block;
+    margin-top: 0.3rem;
+}
+
+.toast-body em.text-muted {
+    display: block;
+    margin-top: 0.8rem;
+    padding-top: 0.8rem;
+    border-top: 1px dashed #e9ecef;
+    font-style: normal;
+    font-size: 0.85rem;
+    color: #6c757d;
+    font-weight: 500;
+}
+
+/* Animation au survol */
+.custom-toast:hover {
+    box-shadow: 0 15px 50px rgba(0, 102, 204, 0.35);
+    transform: scale(1.02);
+    transition: all 0.3s ease;
+}
+
+/* Badge d'information supplémentaire (optionnel) */
+.notification-badge {
+    display: inline-block;
+    background: rgba(0, 102, 204, 0.1);
+    color: #0066cc;
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-top: 0.5rem;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+    .toast-container {
+        right: 10px;
+        left: 10px;
+        top: 70px;
+    }
+    
+    .custom-toast {
+        min-width: auto;
+        width: 100%;
+    }
+}
+
+/* Animation de fermeture */
+.custom-toast.hiding {
+    animation: slideOutRight 0.3s ease-in forwards;
+}
+
+@keyframes slideOutRight {
+    from {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(120px) scale(0.9);
+    }
+}
+
+/* Icône de notification (pour variantes) */
+.notification-icon-wrapper {
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 0.8rem;
+}
+
+.notification-icon-wrapper i {
+    font-size: 1.2rem;
+}
+
+/* Variante succès (optionnel) */
+.custom-toast.toast-success::before {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+}
+
+.custom-toast.toast-success .toast-header {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+}
+
+/* Variante avertissement (optionnel) */
+.custom-toast.toast-warning::before {
+    background: linear-gradient(135deg, #ffc107 0%, #ffb300 100%);
+}
+
+.custom-toast.toast-warning .toast-header {
+    background: linear-gradient(135deg, #ffc107 0%, #ffb300 100%);
+    color: #2c3e50;
+}
+
+.custom-toast.toast-warning .toast-header .btn-close {
+    filter: none;
 }
 
 .petition-card {
