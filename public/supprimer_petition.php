@@ -29,7 +29,7 @@ try {
         header('Location: mes_petitions.php');
         exit();
     }
-    $pdo->beginTransaction();
+    $pdo->beginTransaction();//beginTransaction : fonction permet d'executer plusieures requetes comme un seul bloc
     $delete_signatures = "DELETE FROM Signature WHERE IDP = :id";
     $stmt_signatures = $pdo->prepare($delete_signatures);
     $stmt_signatures->execute(['id' => $id_petition]);
