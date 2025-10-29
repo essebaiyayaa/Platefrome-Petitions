@@ -54,22 +54,30 @@ CREATE TABLE Signature (
 
 -- Données de test
 INSERT INTO Utilisateur (Nom, Prenom, Email, MotDePasse, Role) VALUES
-('Admin', 'Système', 'admin@petition.ma', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin'),
-('User', 'Test', 'user@example.ma', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'user');
+('Essebaiy', 'aya', 'ayaa@petition.ma', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin'),
+('Alami', 'Zineb', 'zineb@example.ma', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'user'),
+('Idrissi', 'Mohamed', 'mohamed@example.ma', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'user');
 -- Mot de passe: password
 
 INSERT INTO Petition (TitreP, DescriptionP, DateFinP, NomPorteurP, Email, IDU) VALUES
-('Pour un environnement plus propre', 'Pétition pour améliorer la propreté et la gestion des déchets dans notre ville.', '2025-12-31', 'Ahmed Bennani', 'ahmed.b@gmail.com', 1),
-('Amélioration des transports publics', 'Demande d\'extension et d\'amélioration du réseau de transport en commun.', '2025-11-30', 'Fatima Alaoui', 'fatima.a@gmail.com', 1),
-('Protection des espaces verts', 'Pétition pour la préservation et la création de nouveaux parcs et jardins publics.', '2025-10-31', 'Youssef Tahiri', 'youssef.t@gmail.com', 2);
+('Pour une éducation de qualité pour tous', 'Pétition pour améliorer les infrastructures éducatives et garantir un accès équitable à l\'éducation dans toutes les régions du Maroc.', '2026-06-30', 'Laila Bensouda', 'laila.b@ensa.ma', 1),
+('Soutien aux entrepreneurs locaux', 'Demande de mesures pour faciliter l\'entrepreneuriat et soutenir les petites entreprises marocaines avec des financements et formations.', '2026-03-31', 'Amine El Fassi', 'amine.f@startup.ma', 2),
+('Préservation du patrimoine culturel marocain', 'Pétition pour la protection et la restauration des sites historiques et monuments culturels du royaume.', '2026-09-15', 'Samira Chraibi', 'samira.c@culture.ma', 1),
+('Amélioration des services de santé publique', 'Demande d\'augmentation du budget santé et amélioration de la qualité des soins dans les hôpitaux publics.', '2025-12-31', 'Dr. Karim Ziani', 'karim.z@sante.ma', 3);
 
 INSERT INTO Signature (IDP, NomS, PrenomS, PaysS, EmailS) VALUES
-(1, 'El Amrani', 'Sara', 'Maroc', 'sara.e@gmail.com'),
-(1, 'Benkirane', 'Omar', 'Maroc', 'omar.b@gmail.com'),
-(1, 'Chakir', 'Meryem', 'Maroc', 'meryem.c@gmail.com'),
-(2, 'Tazi', 'Karim', 'Maroc', 'karim.t@gmail.com'),
-(2, 'Fassi', 'Leila', 'Maroc', 'leila.f@gmail.com'),
-(3, 'Benjelloun', 'Hamza', 'Maroc', 'hamza.b@gmail.com');
+(1, 'Tahiri', 'Yasmine', 'Maroc', 'yasmine.t@gmail.com'),
+(1, 'Benjelloun', 'Rachid', 'Maroc', 'rachid.b@gmail.com'),
+(1, 'Kettani', 'Nadia', 'Maroc', 'nadia.k@gmail.com'),
+(1, 'Berrada', 'Hassan', 'Maroc', 'hassan.b@gmail.com'),
+(2, 'Senhaji', 'Imane', 'Maroc', 'imane.s@gmail.com'),
+(2, 'Mouline', 'Youssef', 'Maroc', 'youssef.m@gmail.com'),
+(2, 'Elbaz', 'Sarah', 'Maroc', 'sarah.e@gmail.com'),
+(3, 'Chakir', 'Omar', 'Maroc', 'omar.c@gmail.com'),
+(3, 'Filali', 'Meriem', 'Maroc', 'meriem.f@gmail.com'),
+(3, 'Tazi', 'Mehdi', 'Maroc', 'mehdi.t@gmail.com'),
+(4, 'Alaoui', 'Fatima', 'Maroc', 'fatima.a@gmail.com'),
+(4, 'Amrani', 'Saad', 'Maroc', 'saad.a@gmail.com');
 ```
 
 ## FEATURES
