@@ -150,5 +150,5 @@ mysql -u your_username -p < migrations/script.sql
 
 - **Backend:** PHP
 - **Database:** MySQL
-- **Frontend:** HTML, CSS, JavaScript
+- **Frontend:** HTML, CSS, JavaScript, Bootstrap
 - **AJAX:** XMLHttpRequest for real-time updates
